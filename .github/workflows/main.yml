@@ -1,4 +1,4 @@
-name: Tests
+name: Release
 on: [workflow_dispatch]
 permissions:
   contents: write
@@ -31,7 +31,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
