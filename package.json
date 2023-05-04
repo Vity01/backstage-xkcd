@@ -14,6 +14,9 @@
     "role": "frontend-plugin"
   },
   "homepage": "https://github.com/Vity01/backstage-xkcd/",
+  "bugs": {
+    "url": "https://github.com/Vity01/backstage-xkcd/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Vity01/backstage-xkcd/"
@@ -33,6 +36,8 @@
     "lint": "backstage-cli package lint",
     "test": "backstage-cli package test",
     "coverage": "backstage-cli package test --coverage",
+    "tsc": "tsc",
+    "tsc:full": "tsc --skipLibCheck false --incremental false",
     "clean": "backstage-cli package clean",
     "prepack": "backstage-cli package prepack",
     "postpack": "backstage-cli package postpack",
@@ -49,7 +54,9 @@
     "react-use": "^17.2.4"
   },
   "peerDependencies": {
-    "react": "^16.13.1 || ^17.2.0"
+    "react": "^16.13.1 || ^17.2.0",
+    "react-router": "6.0.0-beta.0",
+    "react-router-dom": "6.0.0-beta.0"
   },
   "devDependencies": {
     "@backstage/cli": "^0.22.5",
@@ -61,7 +68,8 @@
     "@testing-library/user-event": "^14.0.0",
     "@types/node": "*",
     "msw": "^1.0.0",
-    "cross-fetch": "^3.1.5"
+    "cross-fetch": "^3.1.5",
+    "react-router": "6.0.0-beta.0"
   },
   "files": [
     "dist"
