@@ -40,8 +40,7 @@ jobs:
           git config user.email "<>"
       - run: yarn bump
       - run: git push --follow-tags
-
-    tagged-release:
+  tagged-release:
       name: Create tagged release
       needs: [ bump-version ]
       runs-on: ubuntu-latest
@@ -59,7 +58,6 @@ jobs:
             prerelease: false
             automatic_release_tag: ${{ steps.previoustag.outputs.tag }}
             files: 'CHANGELOG.md'
-
   frontend-publish:
     name: Publish plugin frontend
     runs-on: ubuntu-latest
