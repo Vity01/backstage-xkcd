@@ -1,0 +1,1 @@
+export { XkcdPage } from './XkcdPage';

@@ -1,0 +1,1 @@
+export { XkcdComicCard } from './XkcdComicCard';
