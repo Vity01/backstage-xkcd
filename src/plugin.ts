@@ -1,4 +1,4 @@
-import {createPlugin, createRoutableExtension} from '@backstage/core-plugin-api';
+import {createComponentExtension, createPlugin, createRoutableExtension} from '@backstage/core-plugin-api';
 
 import { rootRouteRef } from './routes';
 
@@ -17,3 +17,16 @@ export const XkcdPage = xkcdPlugin.provide(
     mountPoint: rootRouteRef,
   }),
 );
+
+export const XkcdComicCard =
+    xkcdPlugin.provide(
+        createComponentExtension({
+            name: 'XkcdComicCard',
+            component: {
+                lazy: () =>
+                    import('./components/XkcdComicCard').then(
+                        m => m.XkcdComicCard,
+                    ),
+            },
+        }),
+    );
