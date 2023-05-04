@@ -1,0 +1,22 @@
+name: Release
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: yarn install  --immutable
+    - run: yarn tsc
+    - run: yarn build
+#    - run: yarn coverage
+#    - name: Publish to coveralls.io
+#      uses: coverallsapp/github-action@v1.1.2
+#      with:
+#        github-token: ${{ secrets.GITHUB_TOKEN }}
