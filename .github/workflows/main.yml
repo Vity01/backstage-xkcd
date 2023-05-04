@@ -14,7 +14,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn install
+    - run: yarn install  --immutable
+    - run: yarn build
 #    - run: yarn coverage
 #    - name: Publish to coveralls.io
 #      uses: coverallsapp/github-action@v1.1.2
