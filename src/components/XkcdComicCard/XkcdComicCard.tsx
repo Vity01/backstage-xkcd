@@ -41,7 +41,7 @@ export const XkcdImageView = ({props}: XkcdImageViewProps) => {
     );
 };
 
-function ExplainComponent(num) {
+function ExplainComponent(num: number) {
     return (
         <Link target='_blank'
                  to={`https://www.explainxkcd.com/wiki/index.php/${num}`}>
