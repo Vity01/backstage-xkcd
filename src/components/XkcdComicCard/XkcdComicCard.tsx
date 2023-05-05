@@ -119,7 +119,7 @@ export const XkcdComicCard = (props: XkcdComicProps) => {
                 </div>
                 {props.showExplain &&
                     <div>
-                        {!loading && <ExplainComponent num={xkcdComic.num} />}
+                        {!loading && ExplainComponent(xkcdComic.num) }
                     </div>
                 }
             </InfoCard>
