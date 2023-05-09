@@ -6,6 +6,8 @@ import {
 } from '@backstage/plugin-home';
 import {LAST_INDEX} from "./components/ComicButtons/ComicButtons";
 
+import {XkcdComicProps} from "./types";
+
 export const xkcdPlugin = createPlugin({
     id: 'xkcd',
     routes: {
@@ -36,7 +38,7 @@ export const XkcdComicCard =
     );
 
 export const XkcdComicHomePageComponent = homePlugin.provide(
-    createCardExtension<{ defaultCategory?: 'any' | 'humor' }>({
+    createCardExtension<XkcdComicProps>({
         name: 'XkcdComicCard',
         title: 'xkcd',
         components: () => import('./components/XkcdComicCardHomePage'),

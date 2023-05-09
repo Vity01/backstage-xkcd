@@ -6,6 +6,7 @@ import {configApiRef, fetchApiRef, useApi} from '@backstage/core-plugin-api';
 import {IconButton} from "@material-ui/core";
 import ComicButtons, {LAST_INDEX} from "../ComicButtons/ComicButtons";
 import {OpenInNew} from "@material-ui/icons";
+import {XkcdComicProps} from "../../types";
 
 const useStyles = makeStyles({
     xkcdImage: {
@@ -54,14 +55,6 @@ function ExplainComponent(num: number) {
 }
 
 export let MAX_COUNT = 2770;
-
-export interface XkcdComicProps {
-    showNav?: boolean;
-    showExplain?: boolean;
-    comicNumber?: number;
-    useProxy?: boolean;
-    proxyUrl?: string;
-}
 
 
 export const XkcdComicCard = (props: XkcdComicProps) => {
