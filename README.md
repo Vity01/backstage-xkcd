@@ -42,6 +42,22 @@ const HomePage = () => (
     // ... 
 );
 ```
+Alternatively, this plugin also supports [customizable homepages](https://github.com/backstage/backstage/tree/master/plugins/home#customizable-home-page).
+You simply add `<XkcdComicCard />` to the allowed plugins in section:
+```tsx
+import { XkcdComicCard } from 'backstage-plugin-xkcd';
+//....
+
+export const HomePage = () => {
+  return (
+    <CustomHomepageGrid>
+      // Insert the allowed widgets inside the grid       
+      // ...
+        <XkcdComicCard />
+    </CustomHomepageGrid>
+  );
+};
+```
 
 You can also enable `/xkcd` route in `packages/app/src/App.tsx`
 ```typescript jsx
