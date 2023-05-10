@@ -1,14 +1,14 @@
 import React from 'react';
 import { CustomHomepageGrid } from '@backstage/plugin-home';
-import { XkcdComicCard } from '../src';
 import { Content, Page } from '@backstage/core-components';
+import {XkcdComicHomePageComponent} from "../src";
 
 export const HomePage = () => {
     return (
         <Page themeId="home">
             <Content>
                 <CustomHomepageGrid>
-                    <XkcdComicCard />
+                    <XkcdComicHomePageComponent />
                 </CustomHomepageGrid>
             </Content>
         </Page>
