@@ -104,7 +104,7 @@ or the _Explain link_
 This will hide the _Explain link_.
 
 ## Contributing
-Don't hesitate to contribute to the plugin. This is my first TypeScript/React/Backstage product so please be kind to me... 
+Don't hesitate to contribute to the plugin. This is my first TypeScript/React/Backstage product so please be gentle to me... 
 
 ### Development
 The plugin is added to the example app in this repository, meaning you'll be able to access it by running `yarn start` in the root directory, and then navigating to [/xkcd](http://localhost:3000/xkcd).
