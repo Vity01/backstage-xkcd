@@ -37,7 +37,7 @@ export const XkcdComicCard =
         }),
     );
 
-export const XkcdComicHomePageComponent = homePlugin.provide(
+export const HomePageXkcdComic = homePlugin.provide(
     createCardExtension<XkcdComicProps>({
         name: 'XkcdComicCard',
         title: 'xkcd',

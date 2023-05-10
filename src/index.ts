@@ -1,1 +1,1 @@
-export { xkcdPlugin, XkcdPage, XkcdComicCard, XkcdComicHomePageComponent } from './plugin';
+export { xkcdPlugin, XkcdPage, XkcdComicCard, HomePageXkcdComic } from './plugin';
