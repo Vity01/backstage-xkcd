@@ -58,6 +58,8 @@ export const HomePage = () => {
   );
 };
 ```
+This feature requires `@backstage/plugin-home@^0.5.1` available.
+
 
 You can also enable `/xkcd` route in `packages/app/src/App.tsx`
 ```typescript jsx
