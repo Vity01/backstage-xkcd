@@ -69,13 +69,7 @@ export const XkcdComicHomePageComponent = homePlugin.provide(
                         type: 'number',
                         default: LAST_INDEX,
                         description: 'Show specific comic number. Default - show the last released comic'
-                    },
-                    proxyUrl: {
-                        title: 'Proxy URL',
-                        type: 'string',
-                        default: '/proxy/xkcd-proxy/',
-                        description: 'Set up a proxy for the XKCD API by adding the same configuration in your app-config.yaml file.'
-                    },
+                    }
                 },
             },
         }

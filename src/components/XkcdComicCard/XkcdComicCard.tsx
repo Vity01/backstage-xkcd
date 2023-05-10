@@ -45,12 +45,12 @@ export const XkcdImageView = ({props}: XkcdImageViewProps) => {
 function ExplainComponent(num: number) {
     return (
         <Link target='_blank'
-                 to={`https://www.explainxkcd.com/wiki/index.php/${num}`}>
-        <IconButton title="Explain - open in new window" size="small"
-                    style={{backgroundColor: 'transparent', fontSize: "small"}}>
-            <OpenInNew/> Explain
-        </IconButton>
-    </Link>
+              to={`https://www.explainxkcd.com/wiki/index.php/${num}`}>
+            <IconButton title="Explain - open in new window" size="small"
+                        style={{backgroundColor: 'transparent', fontSize: "small"}}>
+                <OpenInNew/> Explain
+            </IconButton>
+        </Link>
     );
 }
 
@@ -70,8 +70,9 @@ export const XkcdComicCard = (props: XkcdComicProps) => {
         const fetchData = async () => {
             setLoading(true)
             const backendUrl = config.getString('backend.baseUrl');
+            const proxyUrl = '/proxy/xkcd-proxy/';
             try {
-                const url = props.useProxy ? `${backendUrl}/api${props.proxyUrl}` : 'https://xkcd.com/'
+                const url = `${backendUrl}/api${proxyUrl}`
                 const response = await fetch(`${url}${num !== LAST_INDEX ? `${num}/` : ''}info.0.json`);
                 const data = await response.json()
                 if (num === LAST_INDEX) {
@@ -112,7 +113,7 @@ export const XkcdComicCard = (props: XkcdComicProps) => {
                 </div>
                 {props.showExplain &&
                     <div>
-                        {!loading && ExplainComponent(xkcdComic.num) }
+                        {!loading && ExplainComponent(xkcdComic.num)}
                     </div>
                 }
             </InfoCard>
@@ -123,7 +124,5 @@ export const XkcdComicCard = (props: XkcdComicProps) => {
 XkcdComicCard.defaultProps = {
     showNav: true,
     showExplain: true,
-    comicNumber: LAST_INDEX,
-    useProxy: true,
-    proxyUrl: '/proxy/xkcd-proxy/'
+    comicNumber: LAST_INDEX
 };
