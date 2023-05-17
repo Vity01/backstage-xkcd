@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     xkcdImage: {
         width: '100%',
         height: '100%',
-        objectFit: 'cover'
+        objectFit: 'contain'
     }
 });
 
@@ -54,7 +54,7 @@ function ExplainComponent(num: number) {
     );
 }
 
-export let MAX_COUNT = 2770;
+export let MAX_COUNT = 2773;
 
 
 export const XkcdComicCard = (props: XkcdComicProps) => {
