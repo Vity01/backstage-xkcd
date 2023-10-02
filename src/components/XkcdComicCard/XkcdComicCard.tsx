@@ -5,7 +5,7 @@ import {configApiRef, fetchApiRef, useApi} from '@backstage/core-plugin-api';
 
 import {IconButton} from "@material-ui/core";
 import ComicButtons, {LAST_INDEX} from "../ComicButtons/ComicButtons";
-import {OpenInNew} from "@material-ui/icons";
+import OpenInNew from "@material-ui/icons/OpenInNew";
 import {XkcdComicProps} from "../../types";
 
 const useStyles = makeStyles({
@@ -36,6 +36,7 @@ export const XkcdImageView = ({props}: XkcdImageViewProps) => {
             <img
                 src={props.img}
                 alt={props.alt}
+                title={props.title}
                 className={classes.xkcdImage}
             />
         </Link>
