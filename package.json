@@ -74,5 +74,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "resolutions": {
+    "@yarnpkg/parsers": "3.0.0-rc.48.1"
+  }
 }
