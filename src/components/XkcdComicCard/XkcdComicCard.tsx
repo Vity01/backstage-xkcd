@@ -36,7 +36,7 @@ export const XkcdImageView = ({props}: XkcdImageViewProps) => {
             <img
                 src={props.img}
                 alt={props.alt}
-                title={props.title}
+                title={props.alt}
                 className={classes.xkcdImage}
             />
         </Link>
