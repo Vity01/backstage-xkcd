@@ -1,12 +1,16 @@
-import {createComponentExtension, createPlugin, createRoutableExtension} from '@backstage/core-plugin-api';
+import {
+    createComponentExtension,
+    createPlugin,
+    createReactExtension,
+    createRoutableExtension
+} from '@backstage/core-plugin-api';
 
 import {rootRouteRef} from './routes';
 import {
-    createCardExtension, homePlugin
+    homePlugin
 } from '@backstage/plugin-home';
 import {LAST_INDEX} from "./components/ComicButtons/ComicButtons";
 
-import {XkcdComicProps} from "./types";
 
 export const xkcdPlugin = createPlugin({
     id: 'xkcd',
@@ -38,40 +42,46 @@ export const XkcdComicCard =
     );
 
 export const HomePageXkcdComic = homePlugin.provide(
-    createCardExtension<XkcdComicProps>({
+    createReactExtension({
         name: 'XkcdComicCard',
-        title: 'xkcd',
-        components: () => import('./components/XkcdComicCardHomePage'),
-        layout: {
-            height: {minRows: 1},
-            width: {minColumns: 3},
-        },
-        description: 'xkcd comic',
-        settings: {
-            schema: {
-                title: 'xkcd',
-                type: 'object',
-                properties: {
-                    showNav: {
-                        title: 'Show Navigation',
-                        type: 'boolean',
-                        default: true,
-                        description: 'Show navigation buttons'
+        data: {
+            title: 'xkcd',
+            description: 'xkcd comic',
+            'home.widget.config': {
+                layout: {
+                    height: {minRows: 1},
+                    width: {minColumns: 3},
+                },
+                settings: {
+                    schema: {
+                        title: 'xkcd',
+                        type: 'object',
+                        properties: {
+                            showNav: {
+                                title: 'Show Navigation',
+                                type: 'boolean',
+                                default: true,
+                                description: 'Show navigation buttons'
+                            },
+                            showExplain: {
+                                title: 'Show Explain',
+                                type: 'boolean',
+                                default: true,
+                                description: 'Show an external link to xkcd wiki'
+                            },
+                            comicNumber: {
+                                title: 'Show specific comic number',
+                                type: 'number',
+                                default: LAST_INDEX,
+                                description: 'Show specific comic number. Default - show the last released comic'
+                            }
+                        },
                     },
-                    showExplain: {
-                        title: 'Show Explain',
-                        type: 'boolean',
-                        default: true,
-                        description: 'Show an external link to xkcd wiki'
-                    },
-                    comicNumber: {
-                        title: 'Show specific comic number',
-                        type: 'number',
-                        default: LAST_INDEX,
-                        description: 'Show specific comic number. Default - show the last released comic'
-                    }
                 },
             },
-        }
+        },
+        component: {
+            lazy: () => import('./components/XkcdComicCardHomePage').then(c => c.Content)
+        },
     }),
 );
