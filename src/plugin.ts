@@ -1,14 +1,11 @@
 import {
     createComponentExtension,
     createPlugin,
-    createReactExtension,
     createRoutableExtension
 } from '@backstage/core-plugin-api';
 
 import {rootRouteRef} from './routes';
-import {
-    homePlugin
-} from '@backstage/plugin-home';
+import {createCardExtension} from '@backstage/plugin-home-react';
 import {LAST_INDEX} from "./components/ComicButtons/ComicButtons";
 
 
@@ -41,47 +38,41 @@ export const XkcdComicCard =
         }),
     );
 
-export const HomePageXkcdComic = homePlugin.provide(
-    createReactExtension({
+export const HomePageXkcdComic = xkcdPlugin.provide(
+    createCardExtension({
         name: 'XkcdComicCard',
-        data: {
-            title: 'xkcd',
-            description: 'xkcd comic',
-            'home.widget.config': {
-                layout: {
-                    height: {minRows: 1},
-                    width: {minColumns: 3},
-                },
-                settings: {
-                    schema: {
-                        title: 'xkcd',
-                        type: 'object',
-                        properties: {
-                            showNav: {
-                                title: 'Show Navigation',
-                                type: 'boolean',
-                                default: true,
-                                description: 'Show navigation buttons'
-                            },
-                            showExplain: {
-                                title: 'Show Explain',
-                                type: 'boolean',
-                                default: true,
-                                description: 'Show an external link to xkcd wiki'
-                            },
-                            comicNumber: {
-                                title: 'Show specific comic number',
-                                type: 'number',
-                                default: LAST_INDEX,
-                                description: 'Show specific comic number. Default - show the last released comic'
-                            }
-                        },
+        title: 'xkcd',
+        description: 'xkcd comic',
+        layout: {
+            height: {minRows: 1},
+            width: {minColumns: 3},
+        },
+        components: () => import('./components/XkcdComicCardHomePage'),
+        settings: {
+            schema: {
+                title: 'xkcd',
+                type: 'object',
+                properties: {
+                    showNav: {
+                        title: 'Show Navigation',
+                        type: 'boolean',
+                        default: true,
+                        description: 'Show navigation buttons'
                     },
+                    showExplain: {
+                        title: 'Show Explain',
+                        type: 'boolean',
+                        default: true,
+                        description: 'Show an external link to xkcd wiki'
+                    },
+                    comicNumber: {
+                        title: 'Show specific comic number',
+                        type: 'number',
+                        default: LAST_INDEX,
+                        description: 'Show specific comic number. Default - show the last released comic'
+                    }
                 },
             },
-        },
-        component: {
-            lazy: () => import('./components/XkcdComicCardHomePage').then(c => c.Content)
         },
     }),
 );
