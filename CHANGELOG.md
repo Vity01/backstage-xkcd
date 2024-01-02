@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.9](https://github.com/Vity01/backstage-xkcd/compare/v1.0.8...v1.0.9) (2024-01-02)
+
+
+### Bug Fixes
+
+* Depend on @backstage/plugin-home-react ([#6](https://github.com/Vity01/backstage-xkcd/issues/6)) ([145dfff](https://github.com/Vity01/backstage-xkcd/commit/145dfff1479206eda3b168ad1d61eefa4d262b4f))
+
 ### [1.0.8](https://github.com/Vity01/backstage-xkcd/compare/v1.0.7...v1.0.8) (2023-10-06)
 
 ### [1.0.7](https://github.com/Vity01/backstage-xkcd/compare/v1.0.6...v1.0.7) (2023-05-17)
