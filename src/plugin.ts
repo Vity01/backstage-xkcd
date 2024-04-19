@@ -7,6 +7,7 @@ import {
 import {rootRouteRef} from './routes';
 import {CardExtensionProps, createCardExtension} from '@backstage/plugin-home-react';
 import {LAST_INDEX} from "./components/ComicButtons/ComicButtons";
+import { XkcdComicProps } from './types';
 
 
 export const xkcdPlugin = createPlugin({
@@ -39,7 +40,7 @@ export const XkcdComicCard =
     );
 
 export const HomePageXkcdComic: (
-    props: CardExtensionProps<unknown>
+    props: CardExtensionProps<XkcdComicProps>
   ) => React.JSX.Element = xkcdPlugin.provide(
     createCardExtension({
         name: 'XkcdComicCard',
