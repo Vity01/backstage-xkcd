@@ -11,6 +11,9 @@ const useStyles = makeStyles({
         width: '100%',
         height: '100%',
         objectFit: 'contain'
+    },
+    container: {
+        height: '100%'
     }
 });
 
@@ -52,6 +55,8 @@ export const XkcdComicCard = (props: XkcdComicProps) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error>();
     const [comic, setComic] = useState<XkcdComic>();
+
+    const classes = useStyles();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -98,7 +103,9 @@ export const XkcdComicCard = (props: XkcdComicProps) => {
                 title: `Explain ${xkcdComic.safe_title}`
             } : undefined}
         >
-            {loading ? <Progress/> : <XkcdImageView props={xkcdComic}/>}
+            <div className={classes.container}>
+                {loading ? <Progress/> : <XkcdImageView props={xkcdComic}/>}
+            </div>
         </InfoCard>
     )
 };
