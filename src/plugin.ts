@@ -5,7 +5,7 @@ import {
 } from '@backstage/core-plugin-api';
 
 import {rootRouteRef} from './routes';
-import {createCardExtension} from '@backstage/plugin-home-react';
+import {CardExtensionProps, createCardExtension} from '@backstage/plugin-home-react';
 import {LAST_INDEX} from "./components/ComicButtons/ComicButtons";
 
 
@@ -38,7 +38,9 @@ export const XkcdComicCard =
         }),
     );
 
-export const HomePageXkcdComic = xkcdPlugin.provide(
+export const HomePageXkcdComic: (
+    props: CardExtensionProps<unknown>
+  ) => React.JSX.Element = xkcdPlugin.provide(
     createCardExtension({
         name: 'XkcdComicCard',
         title: 'xkcd',
