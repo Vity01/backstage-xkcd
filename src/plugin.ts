@@ -73,6 +73,11 @@ export const HomePageXkcdComic: (
                         type: 'number',
                         default: LAST_INDEX,
                         description: 'Show specific comic number. Default - show the last released comic'
+                    },
+                    title: {
+                        title: 'Card title',
+                        type: 'string',
+                        description: 'Override the card title, which defaults to the name of the comic'
                     }
                 },
             },
