@@ -3,9 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {InfoCard, Link, Progress, ResponseErrorPanel} from '@backstage/core-components';
 import {configApiRef, fetchApiRef, useApi} from '@backstage/core-plugin-api';
 
-import {IconButton} from "@material-ui/core";
 import ComicButtons, {LAST_INDEX} from "../ComicButtons/ComicButtons";
-import OpenInNew from "@material-ui/icons/OpenInNew";
 import {XkcdComicProps} from "../../types";
 
 const useStyles = makeStyles({
@@ -13,6 +11,9 @@ const useStyles = makeStyles({
         width: '100%',
         height: '100%',
         objectFit: 'contain'
+    },
+    container: {
+        height: '100%'
     }
 });
 
@@ -43,18 +44,6 @@ export const XkcdImageView = ({props}: XkcdImageViewProps) => {
     );
 };
 
-function ExplainComponent(num: number) {
-    return (
-        <Link target='_blank'
-              to={`https://www.explainxkcd.com/wiki/index.php/${num}`}>
-            <IconButton title="Explain - open in new window" size="small"
-                        style={{backgroundColor: 'transparent', fontSize: "small"}}>
-                <OpenInNew/> Explain
-            </IconButton>
-        </Link>
-    );
-}
-
 export let MAX_COUNT = 2773;
 
 
@@ -66,6 +55,8 @@ export const XkcdComicCard = (props: XkcdComicProps) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error>();
     const [comic, setComic] = useState<XkcdComic>();
+
+    const classes = useStyles();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -103,22 +94,19 @@ export const XkcdComicCard = (props: XkcdComicProps) => {
 
     const xkcdComic = comic!!;
     return (
-        <>
-            <InfoCard title={loading ? "xkcd" : xkcdComic.safe_title}>
-                <div>
-                    {props.showNav &&
-                        <ComicButtons maxCount={MAX_COUNT} comic={xkcdComic} loading={loading} gotoAction={setNum}
-                                      gotoRandom={gotoRandom}/>}
-                    {loading && (<Progress/>)}
-                    {!loading && (<XkcdImageView props={xkcdComic}/>)}
-                </div>
-                {props.showExplain &&
-                    <div>
-                        {!loading && ExplainComponent(xkcdComic.num)}
-                    </div>
-                }
-            </InfoCard>
-        </>
+        <InfoCard
+            title={props.title || loading ? "xkcd" : xkcdComic.safe_title}
+            variant="fullHeight"
+            action={props.showNav && <ComicButtons maxCount={MAX_COUNT} comic={xkcdComic} loading={loading} gotoAction={setNum} gotoRandom={gotoRandom}/>}
+            deepLink={!loading ? {
+                link: `https://www.explainxkcd.com/wiki/index.php/${xkcdComic.num}`,
+                title: `Explain ${xkcdComic.safe_title}`
+            } : undefined}
+        >
+            <div className={classes.container}>
+                {loading ? <Progress/> : <XkcdImageView props={xkcdComic}/>}
+            </div>
+        </InfoCard>
     )
 };
 
