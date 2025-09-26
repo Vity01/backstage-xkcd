@@ -23,7 +23,7 @@ To install the plugin, you'll need to add it to your Backstage app's dependencie
 
 **Yarn**
 ```shell
-yarn add --cwd packages/app backstage-plugin-xkcd
+yarn --cwd packages/app add backstage-plugin-xkcd
 ```
 
 ## Integration
