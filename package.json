@@ -1,5 +1,5 @@
 {
-  "name": "backstage-plugin-xkcd",
+  "name": "@vity01/backstage-plugin-xkcd",
   "version": "1.1.5",
   "main": "src/index.ts",
   "types": "src/index.ts",
