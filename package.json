@@ -12,7 +12,7 @@
   "backstage": {
     "role": "frontend-plugin",
     "pluginId": "xkcd",
-    "pluginPackage": "backstage-plugin-xkcd"
+    "pluginPackages": ["backstage-plugin-xkcd"]
   },
   "homepage": "https://github.com/Vity01/backstage-xkcd/",
   "bugs": {
