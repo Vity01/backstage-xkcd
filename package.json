@@ -48,7 +48,7 @@
   "dependencies": {
     "@backstage/core-components": "^0.18.6",
     "@backstage/core-plugin-api": "^1.12.2",
-    "@backstage/plugin-home-react": "^0.1.34",
+    "@backstage/plugin-home": "^0.9.1",
     "@backstage/theme": "^0.7.1",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.9.1",
@@ -68,6 +68,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.0.0",
+    "@types/jest": "^30.0.0",
     "@types/node": "*",
     "cross-fetch": "^4.0.0",
     "msw": "^1.0.0",
