@@ -1,0 +1,14 @@
+.yarn
+dist
+coverage
+*.hbs
+templates
+api-report.md
+*-api-report.md
+cli-report.md
+.vscode
+dist-types
+.secrets
+
+# reduce the barrier for adopters to add themselves
+ADOPTERS.md

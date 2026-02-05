@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {InfoCard, Link, Progress, ResponseErrorPanel} from '@backstage/core-components';
 import {configApiRef, fetchApiRef, useApi} from '@backstage/core-plugin-api';
 
-import ComicButtons, {LAST_INDEX} from "../ComicButtons/ComicButtons";
+import ComicButtons from "../ComicButtons/ComicButtons";
 import {XkcdComicProps} from "../../types";
+import {DEFAULT_MAX_COUNT, LAST_INDEX, XKCD_PROXY_PATH, XKCD_URLS} from "../../config";
 
 const useStyles = makeStyles({
     xkcdImage: {
@@ -17,97 +18,124 @@ const useStyles = makeStyles({
     }
 });
 
-type XkcdComic = {
+/**
+ * XKCD API response interface
+ */
+interface XkcdApiResponse {
     safe_title: string;
     alt: string;
     img: string;
     title: string;
     num: number;
+    transcript?: string;
+    year?: string;
+    month?: string;
+    day?: string;
 }
 
 type XkcdImageViewProps = {
-    props: XkcdComic;
+    comic: XkcdApiResponse;
 };
 
-export const XkcdImageView = ({props}: XkcdImageViewProps) => {
+/**
+ * Component to display the XKCD comic image with a link to the original comic
+ */
+export const XkcdImageView = ({comic}: XkcdImageViewProps) => {
     const classes = useStyles();
 
     return (
-        <Link to={`https://xkcd.com/${props.num}`} target='_blank'>
+        <Link to={XKCD_URLS.comic(comic.num)} target='_blank'>
             <img
-                src={props.img}
-                alt={props.alt}
-                title={props.alt}
+                src={comic.img}
+                alt={comic.alt}
+                title={comic.alt}
                 className={classes.xkcdImage}
             />
         </Link>
     );
 };
 
-export let MAX_COUNT = 2773;
-
-
+/**
+ * XkcdComicCard displays an XKCD comic with optional navigation controls
+ *
+ * @param props - Component props
+ * @param props.showNav - Show navigation buttons (default: true)
+ * @param props.showExplain - Show explain link (default: true)
+ * @param props.comicNumber - Specific comic number to display (default: latest)
+ * @param props.title - Custom card title
+ */
 export const XkcdComicCard = (props: XkcdComicProps) => {
     const {fetch} = useApi(fetchApiRef);
     const config = useApi(configApiRef);
 
     const [num, setNum] = useState<number>(props.comicNumber || LAST_INDEX);
+    const [maxCount, setMaxCount] = useState<number>(DEFAULT_MAX_COUNT);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error>();
-    const [comic, setComic] = useState<XkcdComic>();
+    const [comic, setComic] = useState<XkcdApiResponse>();
 
     const classes = useStyles();
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true)
+        const fetchData = async (): Promise<void> => {
+            setLoading(true);
             const backendUrl = config.getString('backend.baseUrl');
-            const proxyUrl = '/proxy/xkcd-proxy/';
             try {
-                const url = `${backendUrl}/api${proxyUrl}`
+                const url = `${backendUrl}/api${XKCD_PROXY_PATH}`;
                 const response = await fetch(`${url}${num !== LAST_INDEX ? `${num}/` : ''}info.0.json`);
-                const data = await response.json()
+
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch comic: ${response.statusText}`);
+                }
+
+                const data: XkcdApiResponse = await response.json();
                 if (num === LAST_INDEX) {
-                    MAX_COUNT = data.num;
+                    setMaxCount(data.num);
                 }
                 setComic(data);
-                setLoading(false)
-                return data;
+                setLoading(false);
             } catch (e) {
-                if (e instanceof Error) {
-                    setError(e);
-                } else {
-                    setError(new Error(e as string));
-                }
+                const errorMessage = e instanceof Error ? e.message : String(e);
+                setError(new Error(errorMessage));
+                setLoading(false);
             }
-        }
+        };
         fetchData().then();
-    }, [num]);
+    }, [num, config, fetch]);
 
-    const gotoRandom = () => {
-        setNum(Math.floor(Math.random() * MAX_COUNT) + 1);
-    };
+    const gotoRandom = useCallback(() => {
+        setNum(Math.floor(Math.random() * maxCount) + 1);
+    }, [maxCount]);
 
     if (error) {
         return <ResponseErrorPanel error={error}/>;
     }
 
-    const xkcdComic = comic!!;
+    if (loading || !comic) {
+        return (
+            <InfoCard title={props.title || "xkcd"} variant="fullHeight">
+                <div className={classes.container}>
+                    <Progress/>
+                </div>
+            </InfoCard>
+        );
+    }
+
     return (
         <InfoCard
-            title={props.title || loading ? "xkcd" : xkcdComic.safe_title}
+            title={props.title || comic.safe_title}
             variant="fullHeight"
-            action={props.showNav && <ComicButtons maxCount={MAX_COUNT} comic={xkcdComic} loading={loading} gotoAction={setNum} gotoRandom={gotoRandom}/>}
-            deepLink={!loading ? {
-                link: `https://www.explainxkcd.com/wiki/index.php/${xkcdComic.num}`,
-                title: `Explain ${xkcdComic.safe_title}`
+            action={props.showNav && <ComicButtons maxCount={maxCount} comic={comic} loading={loading} gotoAction={setNum} gotoRandom={gotoRandom}/>}
+            deepLink={props.showExplain ? {
+                link: XKCD_URLS.explain(comic.num),
+                title: `Explain ${comic.safe_title}`
             } : undefined}
         >
             <div className={classes.container}>
-                {loading ? <Progress/> : <XkcdImageView props={xkcdComic}/>}
+                <XkcdImageView comic={comic}/>
             </div>
         </InfoCard>
-    )
+    );
 };
 
 XkcdComicCard.defaultProps = {

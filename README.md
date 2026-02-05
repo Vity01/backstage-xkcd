@@ -58,7 +58,7 @@ export const HomePage = () => {
   );
 };
 ```
-This feature requires `@backstage/plugin-home@^0.5.1` available.
+This feature requires `@backstage/plugin-home-react@^0.1.34` available.
 
 
 You can also enable `/xkcd` route in `packages/app/src/App.tsx`
@@ -73,12 +73,14 @@ const routes = (
     </FlatRoutes>
 ```
 
-Set up a proxy for the XKCD API by adding the following configuration to your app-config.yaml file:
+Set up a proxy for the XKCD API by adding the following configuration to your `app-config.yaml` file:
 ```yaml
 proxy:
   '/xkcd-proxy':
     target: https://xkcd.com/
 ```
+
+> **Note:** The plugin will access the API via `/api/proxy/xkcd-proxy/` endpoint. Backstage automatically prepends `/api/proxy/` to the configured proxy routes.
 
 And that's it! The xkcd plugin should now be integrated into your Backstage app, and you should see the xkcd card when you navigate to the page where it's included.
 
@@ -96,12 +98,19 @@ You can also configure the plugin to show or hide the navigation bar by passing 
 ```
 This will hide the navigation bar.
 
-or the _Explain link_
+You can hide the _Explain link_:
 
 ```typescript jsx
 <XkcdComicCard showExplain={false} />
 ```
 This will hide the _Explain link_.
+
+You can customize the card title:
+
+```typescript jsx
+<XkcdComicCard title="My Custom Title" />
+```
+This will set a custom title for the card. By default, the title is the comic's safe_title.
 
 ## Contributing
 Don't hesitate to contribute to the plugin. This is my first TypeScript/React/Backstage product so please be gentle to me... 
