@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/Vity01/backstage-xkcd/compare/v1.1.1...v1.1.2) (2026-02-05)
+
+
+### Bug Fixes
+
+* add pluginId and pluginPackage to backstage configuration ([#14](https://github.com/Vity01/backstage-xkcd/issues/14)) ([3f49033](https://github.com/Vity01/backstage-xkcd/commit/3f49033b4be5cf1cc0f83a3cb878d283d8dad509))
+
 ### [1.1.1](https://github.com/Vity01/backstage-xkcd/compare/v1.0.11...v1.1.1) (2026-02-05)
 
 #### Features
