@@ -10,7 +10,9 @@
     "types": "dist/index.d.ts"
   },
   "backstage": {
-    "role": "frontend-plugin"
+    "role": "frontend-plugin",
+    "pluginId": "xkcd",
+    "pluginPackage": "backstage-plugin-xkcd"
   },
   "homepage": "https://github.com/Vity01/backstage-xkcd/",
   "bugs": {
