@@ -4,9 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.1.1](https://github.com/Vity01/backstage-xkcd/compare/v1.0.11...v1.1.1) (2026-02-05)
 
-## [1.1.0](https://github.com/Vity01/backstage-xkcd/compare/v1.0.11...v1.1.0) (2026-02-05)
-
-### Features
+#### Features
 
 * **deps**: Upgrade all Backstage dependencies to latest versions
   * @backstage/cli: ^0.22.5 → ^0.35.3
@@ -41,7 +39,7 @@ All notable changes to this project will be documented in this file. See [standa
 * **docs**: Add JSDoc comments to exported components and functions
 * **perf**: Add useCallback optimization for gotoRandom function
 
-### Bug Fixes
+#### Bug Fixes
 
 * **error-handling**: Add HTTP response status check in fetch operations
 * **error-handling**: Improve error handling with proper error messages and try-catch blocks
@@ -51,7 +49,7 @@ All notable changes to this project will be documented in this file. See [standa
 * **deps**: Add proper dependency array to useEffect [num, config, fetch]
 * **logic**: Improve conditional rendering logic in XkcdComicCard
 
-### Code Quality
+#### Code Quality
 
 * **refactor**: Convert all JSX components to TypeScript
 * **refactor**: Remove mutable exports and use proper state
@@ -60,7 +58,7 @@ All notable changes to this project will be documented in this file. See [standa
 * **style**: Add proper TypeScript interfaces for all props
 * **style**: Improve code organization and readability
 
-### DevOps
+#### DevOps
 
 * **ci**: Update GitHub Actions checkout to v4
 * **ci**: Update GitHub Actions setup-node to v4
@@ -69,7 +67,7 @@ All notable changes to this project will be documented in this file. See [standa
 * **ci**: Update coveralls action to v2 (commented)
 * **lint**: Add .eslintignore to exclude generated files
 
-### Documentation
+#### Documentation
 
 * **docs**: Add UPGRADE_SUMMARY.md with technical upgrade details
 * **docs**: Add UPGRADE_COMPLETE.md with comprehensive upgrade summary
