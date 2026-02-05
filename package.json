@@ -1,5 +1,5 @@
 {
-  "name": "@vity01/backstage-plugin-xkcd",
+  "name": "backstage-plugin-xkcd",
   "version": "1.1.6",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -13,7 +13,7 @@
     "role": "frontend-plugin",
     "pluginId": "xkcd",
     "pluginPackages": [
-      "@vity01/backstage-plugin-xkcd"
+      "backstage-plugin-xkcd"
     ]
   },
   "homepage": "https://github.com/Vity01/backstage-xkcd/",
